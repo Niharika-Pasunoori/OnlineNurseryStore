@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+{% load static %}
+{% load custom_tags %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'styles/app.css' %}">
+    <title>Green Aura</title>
+    <script type="text/javascript">
+        var user = '{{ request.user }}'
+
+            function getToken(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            const csrftoken = getToken('csrftoken');
+    </script>
+  </head>
+  <body>
+    
+    <header>       
+        <div class="navBar">
+            <div class="nav-logo col-sm-2 col-md-3">
+            <a class="text-white text-decoration-none" href="{% url 'home' %}">
+                <b class="boldclass logo-panel1">GreenAura</b><br>
+                <b class="boldclass logo-panel2">Go Green, Live Green.</b>
+            </a>
+            </div>
+           
+            <form id="searchForm" class="form-search col-sm-5 col-md-4" action="{% url 'products' %}" method="get">
+                 <div class="nav-search">
+                    <input class="search-input" type="text" name="search_query" value="{{ search_query }}">
+                    <button class="btn search-icon" type ="submit" value="">
+                        <i style="background-color: #CCE8CC" class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </form>
+            <div class="nav-dropdown col-sm-3 col-md-3">            
+                <div class="btn-group dropdown">
+                    <button type="button" class="border-0 dropdown" data-toggle="dropdown" aria-expanded="false">
+                    {% if request.user.is_authenticated %}
+                        {% if request.user|in_group:'admin' %}
+                            Prodcuts
+                        {% else %}
+                            My Profile
+                        {% endif %}
+                    {% else %}
+                       Sign In
+                    {% endif %}
+                    </button>
+                    <div class="dropdown-menu dropdown">
+                    {% if request.user.is_authenticated %}
+                      {% if request.user|in_group:'admin' %}
+                      <a class="dropdown-item dropdown" href="{% url 'admin_products_page' %}">Prodcuts</a>
+                      <a class="dropdown-item dropdown" href="{% url 'admin_orders_page' %}">Orders</a>
+                      {% else %}
+                      <a class="dropdown-item dropdown" href="{% url 'userProfile' %}">My Profile</a>
+                      <a class="dropdown-item dropdown" href="{% url 'viewOrders' %}">Orders</a>
+                      
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item dropdown" href="{% url 'logoutUser' %}">Sign Out</a>
+                      {% endif %}
+                    {% else %}
+                    <a class="dropdown-item dropdown" href="{% url 'loginUser' %}">Sign In</a>
+                    <a class="dropdown-item dropdown" href="{% url 'register' %}">New Customer? SignUp</a>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="nav-cart col-sm-1 col-md-2">
+                {% if request.user|in_group:'admin' %}
+                <div class="cart"><a class="dropdown-item dropdown cart" href="{% url 'logoutUser' %}">Sign out</a></div>
+                {% else %}
+                <div class="cart"><i class="fa-solid fa-cart-shopping" style="color: #cce8cc;"></i><a href="{% url 'viewCart' %}" class="link-light" style="text-decoration: none; color: white;">Cart</a></div>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}}" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+        {% endfor %}
+    {% endif %}
+
+    {% block content %}
+
+    {% endblock content %}
+   
+    <footer>
+        <div class="footer-container col-12">
+            <ul class="col-sm-4">
+                <li>Privacy Policy</li>
+                <li>Shipping Policy</li>
+                <li>Terms of Service</li>
+                <li>Help</li>
+            </ul>
+            <ul class="col-sm-4">
+                <li>GreenAura</li>
+                <li>500 Terry Francois Street</li>
+                <li>India, 506001</li>
+            </ul>
+            <ul class="col-sm-4">      
+                <li>(+91)989-362-6161</li>
+                <li>(+91)989-461-2161</li>
+                <li>Email greenaura@mysite.com</li>
+                <li><pre class="footer-icons"><i class="fa-brands fa-instagram"></i>    <i class="fa-brands fa-facebook"></i>    <i class="fa-brands fa-twitter"></i></pre></li>
+            </ul>
+        </div>
+    </footer>
+
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+  </body>
+</html>

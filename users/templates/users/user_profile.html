@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="login-container h-75 m-4 d-flex justify-content-around align-items-center">
+    <div class="flex-item m-4 w-50 p-4 d-flex justify-content-center align-content-center orders-background shadow">
+            
+        {% if edit_mode %}
+            <form method="POST" action="{% url 'userProfile' %}" class="orders-background">
+        {% else %}
+        <form class="orders-background">
+        {% endif %}
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group orders-background">
+                <label for="formInput#text" class="orders-background"><b class="orders-background">{{field.label}} :</b></label>
+                {% if edit_mode %}
+                    {{field}}
+                {% else %}
+                    {{field.value}}
+                {% endif %}
+            </div>
+    
+            {% for error in field.errors %}
+                <p class="orders-background" style="color:red;">{{error}}</p>
+            {% endfor %}
+        {% endfor %}
+        {% if edit_mode %}
+            <input type="submit" class="btn btn-primary" value="Save"/>
+        {% else %}
+            <a href="?edit=1" class="btn btn-primary">Edit</a>
+            <span class="orders-background">or <a href="{% url 'home' %}" class="orders-background">Return to Store</a></span>
+        {% endif %}
+    </form>
+    
+    </div>
+</div>
+
+{% endblock content %}

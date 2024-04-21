@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<h4 style="text-align:center;margin-top: 2rem;"><b>Add Product Details...!!!</b></h4>
+<div class="product-container h-100 w-80  mb-3 d-flex justify-content-around align-items-center">
+    <div class="flex-item d-flex flex-wrap align-content-start orders-background p-4">
+            
+            <form method="POST" action="{% url 'addProduct' %}" class="orders-background" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group orders-background"> 
+                      <label for="formInput#text" class="orders-background">{{field.label}}</label><br>
+                      {{field}} 
+                    </div>
+
+                    {% for error in field.errors %}
+                        <p style="color:red;" class="orders-background">{{error}}</p>
+                    {% endfor %}
+                {% endfor %}
+                <input type="submit" class="btn btn-primary" value="save"/> <span class="orders-background">or <a href="{% url 'home' %}">Return to Store</a></span>
+            </form> 
+    </div>
+</div>
+
+{% endblock content %}
+

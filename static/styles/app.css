@@ -1,0 +1,184 @@
+*{
+    margin:0;
+    font-family:Arial;
+    border:border-box;
+    /* background-color: white; */
+}
+html,body{
+    height: 100%;
+    margin: 0;
+}
+
+/* navbar */
+
+.navBar{
+    height:8rem;
+    background-color:#E2B6CF; 
+    width:100%;
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.nav-logo{
+    background-color:#E2B6CF;
+    flex-direction:column;
+    display: flex;
+    justify-content:center;
+    height:50%;
+    color:white;
+    
+}
+
+.boldclass{
+    background-color: #E2B6CF;
+}
+.logo-panel1{
+    font-size:2rem;
+}
+.logo-panel2{
+    font-size:1rem;
+}
+
+.nav-search{
+    display:flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    /* width:620px; */
+    /* height:40px; */
+    background-color:whitesmoke;
+    border-radius:3PX;
+}
+
+.search-input{
+    width:100%;
+    font-size:1rem;
+    border:none;
+}
+.search-icon{
+    width:20%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:1.2rem;
+    border-top-right-radius:3px;
+    border-bottom-right-radius:3px;
+    background-color: #CCE8CC;
+    color: #0F1111;
+}
+
+.nav-dropdown{
+    display:flex;
+    justify-content: center;
+    background-color: #E2B6CF;
+}
+
+.dropdown{
+    background-color:#E2B6CF;
+    color:white;
+    font-weight: 600;
+    font-size:1.5rem;
+    border:none;;
+    border-radius:10%;
+
+}
+
+
+.nav-cart{
+    display:flex;
+    justify-content: center;
+    background-color:#E2B6CF;
+    color:white;
+    font-weight: 600;
+    font-size:1.5rem;
+}
+
+.cart{
+    background-color: #E2B6CF;
+    
+}
+.cart i{
+    background-color: #E2B6CF;
+    font-size:1.5rem;
+}
+
+
+
+/* footer */
+
+
+
+.footer-container{
+
+    position: relative;
+    /* bottom:0; */
+    width: 100%;
+    background-color: #CCE8CC;   
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items:center;
+    line-height:2rem;
+
+}
+
+ul{
+    background-color: #CCE8CC; 
+    list-style-type:none;
+}
+ul li{
+    background-color: #CCE8CC; 
+}
+
+
+ul li pre i{
+    background-color: #CCE8CC; 
+}
+
+.footer-icons{
+    background-color: #CCE8CC; 
+    font-size: 1.5rem;
+}
+
+
+
+/* Carousel */
+
+
+#carousel-Controls .carousel-item img {
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+    height:400px;
+}
+
+/* landing page card */
+
+.card:hover{
+    background-color:#F6EFEE;
+}
+
+/* product-focused */
+
+.product-focused1{
+    background-color: #E2B6CF;
+}
+
+.card1{
+    background-color: #CCE8CC;
+}
+
+.product-focused2{
+    background-color:#CCE8CC;
+}
+
+.card2{
+    background-color:#E2B6CF;
+}
+
+/* orders page */
+
+
+.orders-background{
+    background-color: #F6EFEE;
+}

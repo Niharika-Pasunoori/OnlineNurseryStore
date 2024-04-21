@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="products-details-container d-flex-column flex-center align-items-center justify-content-center m-4 p-4">
+    <div class="add-product mx-4 px-4 "><h4 style="text-align:right;"><a href="{% url 'addProduct' %}" class="btn btn-lg btn-block orders-background">Add product</a></h4></div>
+    <div id="product-list" class="details-container d-flex flex-row justify-content-center m-4 p-4">
+      <div class="row">
+        <!-- List Item 1 -->
+        <div class="col-sm-3">
+          <div class="list-group-item border-0"><b>Name:</b></div>
+        </div>
+        <!-- List Item 2 -->
+        <div class="col-sm-3">
+          <div class="list-group-item border-0"><b>Category: </b></div>
+        </div>
+        <!-- List Item 3 -->
+        <div class="col-sm-2">
+          <div class="list-group-item border-0"><b>Price: </b></div>
+        </div>
+        <div class="col-sm-2">
+          
+        </div>
+        <div class="col-sm-2">
+          
+        </div>
+
+        {% for product in products %}
+        <div class="col-sm-3">
+          <div class="list-group-item">{{product.name}}</div>
+        </div>
+        <!-- List Item 2 -->
+        <div class="col-sm-3">
+          <div class="list-group-item">{{product.category}}</div>
+        </div>
+        <!-- List Item 3 -->
+        <div class="col-sm-3">
+          <div class="list-group-item">{{product.price}}</div>
+        </div>
+        <div class="col-sm-1">
+          <a href="{% url 'update_product' product.id %}" class="btn btn-md btn-sm btn-outline-secondary text-warning" >Update</a> 
+        </div>
+        <div class="col-sm-2">
+          <form method="post" action="{% url 'delete_product' product.id %}">
+            {% csrf_token %}
+            <button type="submit"  class="btn btn-md btn-sm btn-outline-secondary text-danger">Delete</button>
+           </form>
+        </div>
+        {% endfor %}
+      
+      </div>
+    </div>
+</div>
+{% include 'pagination.html' with queryset=products custom_range=custom_range %} 
+
+{% endblock content %}

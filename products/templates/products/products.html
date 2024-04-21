@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+  <div class="album py-5 bg-light h-100">
+    <div class="container">
+
+      <div class="row">
+
+        {% for product in products %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{{ product.image.url }}" class="bd-placeholder-img card-img-top" width="200%" height="225">
+
+            <div class="card-body">
+              <p class="card-text">{{ product.name }}</p>
+              <p class="card-text">₹ {{ product.price }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button data-product="{{product.id}}" data-action="add" type="button" class="btn btn-sm btn-outline-secondary add-to-cart update-cart">Add to Cart</button>
+                  <a href="{% url 'productDetail' product.id %}" class="btn btn-sm btn-outline-secondary">View</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% include 'pagination.html' with queryset=products custom_range=custom_range %}
+{% endblock content %}

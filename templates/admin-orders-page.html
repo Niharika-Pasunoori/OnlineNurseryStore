@@ -1,0 +1,58 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+<div class="orders-details-container h-75">
+
+    <div id="order-list" class="details-container d-none d-flex flex-row justify-content-center m-4 p-4">
+        <div class="row">
+          <!-- List Item 1 -->
+          <div class="col-sm-3">
+            <div class="list-group-item border-0"><b>Name:</b></div>
+          </div>
+          <!-- List Item 2 -->
+          <div class="col-sm-3">
+            <div class="list-group-item border-0"><b>Quantity: </b></div>
+          </div>
+          <!-- List Item 3 -->
+          <div class="col-sm-2">
+            <div class="list-group-item border-0"><b>Staus: </b></div>
+          </div>
+          <div class="col-sm-2">
+            
+          </div>
+          <div class="col-sm-2">
+            
+          </div>
+    
+          {% for order in orders %}
+          <div class="col-sm-3">
+            <div class="list-group-item">{{order.product}}</div>
+          </div>
+          <!-- List Item 2 -->
+          <div class="col-sm-3">
+            <div class="list-group-item">{{order.quantity}}</div>
+          </div>
+          <!-- List Item 3 -->
+          <div class="col-sm-3">
+            <div class="list-group-item">{{order.status}}</div>
+          </div>
+          <div class="col-sm-1">
+              <a href="{% url 'update_order' order.id %}" class="btn btn-sm btn-outline-secondary text-warning" >Update</a> 
+          </div>
+          <div class="col-sm-2">
+            <form method="post" action="{% url 'delete_order' order.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-outline-secondary text-danger">Delete</button>
+             </form>
+          </div>
+          {% endfor %}
+        
+        </div>
+      </div>
+
+</div>
+{% include 'pagination.html' with queryset=orders custom_range=custom_range %} 
+
+{% endblock content %}

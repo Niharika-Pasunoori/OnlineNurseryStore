@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+{% if sum == 0%}
+
+<div class="orderContainer d-flex flex-column align-items-md-center justify-content-center p-4 m-4 orders-background" style="height: 400px;" >
+    <h3 class="orderitems orders-background">No orders  on your name yet!!</h3>
+    <br>
+    <h4 class="orderitems orders-background">Plese explore our site to place orders, <a href="{% url 'home' %}" class ="orders-background">Home Page</a></h4>
+</div>
+
+
+{% else %}
+<div class="orderContainer d-flex flex-column align-items-md-center px-4 mx-4">
+    <br>
+    <h1>Thanks for the order!!</h1>
+    <br>
+    {% for order in orderDetails %}
+    <div class="orderitems d-flex flex-row justify-content-around align-items-center mx-4 py-4 orders-background" style="width:70%;">
+        <div class="flex-image orders-background">
+            <img src="{{ order.product.image.url }}" class="bd-placeholder-img card-img-top " style="height: 220px; width:280px; background-color: #F6EFEE;">
+        </div>
+        <div class="flex-body mx-4 px-4 orders-background">
+            <h5 class="flex-title orders-background"><b class="orders-background">Name: </b>{{ order.product.name }}</h5>
+            <p class="flex-text orders-background"><b class="orders-background">Qunatity: </b>{{ order.quantity }}</p>
+            <p class="flex-text orders-background"><b class="orders-background">Cost: </b>{{ order.get_cost }}</p>
+            <p class="flex-text orders-background"><b class="orders-background">Status: </b>{{ order.status }}</p>
+        </div>
+    </div>
+    <br>
+    
+    {% endfor %}
+    
+</div>
+<h1 class="d-flex flex-row justify-content-end"><p class="orders-background mx-4"><b class="orders-background">Total Cost: </b>{{sum}}</h1></p>
+
+{% endif %}
+<!-- 
+<div class="card-group">
+    {% for order in orderDetails %}
+        <div class="card">
+            <img src="{{ order.product.image.url }}" class="bd-placeholder-img card-img-top" width="200" height="200">
+            <div class="card-body">
+            <h5 class="card-title"><b>Name: </b>{{ order.product.name }}</h5>
+            <p class="card-text"><b>Qunatity: </b>{{ order.quantity }}</p>
+            <p class="card-text"><b>Cost: </b>{{ order.get_cost }}</p>
+            <p class="card-text"><b>Status: </b>{{ order.status }}</p>
+            
+            </div>
+        </div>
+    {% endfor %}
+
+</div> -->
+
+{% endblock content %}
