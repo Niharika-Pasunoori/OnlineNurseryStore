@@ -17,6 +17,7 @@ GreenAura is a vibrant online nursery store built with Django, JavaScript, and B
 ## Requirements
 - Python
 - Django
+- HTML
 - JavaScript
 - Bootstrap
 ## Installation
